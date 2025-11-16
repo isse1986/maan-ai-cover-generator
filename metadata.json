@@ -1,0 +1,5 @@
+{
+  "name": "Maan AI Book Cover Generator",
+  "description": "A professional, AI-powered book cover generator for Amazon KDP and similar platforms. Users can input a title, author, and genre to generate unique, editable book covers. Features include localStorage saving, email sharing, and support for multiple publishing templates.",
+  "requestFramePermissions": []
+}
