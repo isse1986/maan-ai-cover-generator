@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 
 const App: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!email.trim()) {
+      return;
+    }
+    setIsSubmitted(true);
+  };
+
   return (
-    <div className="min-h-screen bg-brand-primary text-brand-light">
+    <div className="min-h-screen bg-brand-primary text-brand-light scroll-smooth">
       <Header />
       <main>
         <section className="max-w-6xl mx-auto px-6 py-16 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
@@ -17,12 +28,18 @@ const App: React.FC = () => {
               keep you moving forward.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-brand-highlight text-brand-primary font-semibold px-6 py-3 rounded-lg hover:bg-opacity-80 transition">
+              <a
+                className="bg-brand-highlight text-brand-primary font-semibold px-6 py-3 rounded-lg hover:bg-opacity-80 transition"
+                href="#pricing"
+              >
                 Download the Planner
-              </button>
-              <button className="border border-brand-highlight text-brand-highlight font-semibold px-6 py-3 rounded-lg hover:bg-brand-highlight hover:text-brand-primary transition">
+              </a>
+              <a
+                className="border border-brand-highlight text-brand-highlight font-semibold px-6 py-3 rounded-lg hover:bg-brand-highlight hover:text-brand-primary transition"
+                href="#templates"
+              >
                 Preview the Pages
-              </button>
+              </a>
             </div>
             <div className="flex flex-wrap gap-6 text-sm text-brand-text">
               <div>
@@ -62,7 +79,9 @@ const App: React.FC = () => {
                 <p className="text-sm text-brand-light">Next review</p>
                 <p className="text-xl font-display">Friday, 5:00 PM</p>
               </div>
-              <button className="text-sm font-semibold text-brand-highlight">Open review</button>
+              <a className="text-sm font-semibold text-brand-highlight" href="#templates">
+                Open review
+              </a>
             </div>
           </div>
         </section>
@@ -182,9 +201,12 @@ const App: React.FC = () => {
                 <h4 className="text-4xl font-display">$24</h4>
                 <p className="text-brand-text">Includes 5 color themes + 65 hyperlinked pages</p>
               </div>
-              <button className="w-full bg-brand-highlight text-brand-primary font-semibold px-6 py-3 rounded-lg hover:bg-opacity-80 transition">
+              <a
+                className="w-full bg-brand-highlight text-brand-primary font-semibold px-6 py-3 rounded-lg hover:bg-opacity-80 transition text-center"
+                href="mailto:hello@digitalplanner.com?subject=Digital%20Planner%20Purchase"
+              >
                 Buy Now
-              </button>
+              </a>
               <p className="text-xs text-brand-text">Secure checkout. Instant download link delivered by email.</p>
             </div>
           </div>
@@ -228,9 +250,33 @@ const App: React.FC = () => {
             <p className="text-brand-text">
               Download the Digital Planner and bring clarity to your routines with guided prompts and flexible layouts.
             </p>
-            <button className="bg-brand-highlight text-brand-primary font-semibold px-8 py-3 rounded-lg hover:bg-opacity-80 transition">
-              Start Planning Today
-            </button>
+            <form className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3" onSubmit={handleSubmit}>
+              <input
+                className="flex-1 rounded-lg border border-brand-accent bg-brand-primary/80 px-4 py-3 text-brand-light focus:outline-none focus:ring-2 focus:ring-brand-highlight"
+                type="email"
+                name="email"
+                placeholder="Enter your email for instant download"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                  if (isSubmitted) {
+                    setIsSubmitted(false);
+                  }
+                }}
+                required
+              />
+              <button
+                className="bg-brand-highlight text-brand-primary font-semibold px-8 py-3 rounded-lg hover:bg-opacity-80 transition"
+                type="submit"
+              >
+                Start Planning Today
+              </button>
+            </form>
+            {isSubmitted && (
+              <p className="text-sm text-brand-highlight">
+                Thanks! Your download link is on the way. Check your inbox in the next few minutes.
+              </p>
+            )}
           </div>
         </section>
       </main>

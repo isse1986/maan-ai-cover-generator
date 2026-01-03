@@ -13,9 +13,12 @@ const Header: React.FC = () => {
           <a className="hover:text-brand-highlight transition" href="#templates">Templates</a>
           <a className="hover:text-brand-highlight transition" href="#pricing">Pricing</a>
           <a className="hover:text-brand-highlight transition" href="#faq">FAQ</a>
-          <button className="bg-brand-highlight text-brand-primary font-semibold px-4 py-2 rounded-lg hover:bg-opacity-80 transition">
+          <a
+            className="bg-brand-highlight text-brand-primary font-semibold px-4 py-2 rounded-lg hover:bg-opacity-80 transition"
+            href="#pricing"
+          >
             Get the Planner
-          </button>
+          </a>
         </nav>
       </div>
     </header>
